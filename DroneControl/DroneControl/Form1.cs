@@ -27,5 +27,14 @@ namespace DroneControl
         {
 
         }
+        private void Bt_DroneStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bt_EmergencyStop_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,13 @@
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\DroneControl.exe.config
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\DroneControl.exe
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\DroneControl.pdb
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\CircularProgressBar.dll
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\WinFormAnimation.dll
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.csprojAssemblyReference.cache
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.Main.resources
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.Properties.Resources.resources
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.csproj.GenerateResource.cache
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.csproj.CoreCompileInputs.cache
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.csproj.CopyComplete
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.exe
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.pdb
