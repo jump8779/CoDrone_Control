@@ -11,3 +11,7 @@ D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.
 D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.csproj.CopyComplete
 D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.exe
 D:\Git_Project\Codrone_Control\DroneControl\DroneControl\obj\Debug\DroneControl.pdb
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\IronPython.dll
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\IronPython.Modules.dll
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\Microsoft.Dynamic.dll
+D:\Git_Project\Codrone_Control\DroneControl\DroneControl\bin\Debug\Microsoft.Scripting.dll
