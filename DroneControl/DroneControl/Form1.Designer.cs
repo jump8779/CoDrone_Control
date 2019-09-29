@@ -38,13 +38,13 @@
             this.Bt_DroneStart = new System.Windows.Forms.Button();
             this.Bt_EmergencyStop = new System.Windows.Forms.Button();
             this.GB_DroneState = new System.Windows.Forms.GroupBox();
+            this.lbl_Drone = new System.Windows.Forms.Label();
+            this.lbl_Port = new System.Windows.Forms.Label();
             this.lbldrone = new System.Windows.Forms.Label();
             this.lblport = new System.Windows.Forms.Label();
             this.lbltemp = new System.Windows.Forms.Label();
             this.lblpressure = new System.Windows.Forms.Label();
             this.lblbattery = new System.Windows.Forms.Label();
-            this.lbl_Port = new System.Windows.Forms.Label();
-            this.lbl_Drone = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DroneNevi)).BeginInit();
             this.GB_DroneState.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +98,7 @@
             this.PBar_temp.SuperscriptText = "°C";
             this.PBar_temp.TabIndex = 2;
             this.PBar_temp.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.PBar_temp.Value = 68;
             // 
             // PBar_pressure
             // 
@@ -128,6 +129,7 @@
             this.PBar_pressure.SuperscriptText = "°C";
             this.PBar_pressure.TabIndex = 3;
             this.PBar_pressure.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.PBar_pressure.Value = 68;
             // 
             // PBar_battery
             // 
@@ -158,6 +160,7 @@
             this.PBar_battery.SuperscriptText = "°C";
             this.PBar_battery.TabIndex = 4;
             this.PBar_battery.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            this.PBar_battery.Value = 68;
             // 
             // Bt_DroneStart
             // 
@@ -191,6 +194,22 @@
             this.GB_DroneState.TabIndex = 7;
             this.GB_DroneState.TabStop = false;
             this.GB_DroneState.Text = "Drone_State";
+            // 
+            // lbl_Drone
+            // 
+            this.lbl_Drone.AutoSize = true;
+            this.lbl_Drone.Location = new System.Drawing.Point(107, 85);
+            this.lbl_Drone.Name = "lbl_Drone";
+            this.lbl_Drone.Size = new System.Drawing.Size(0, 15);
+            this.lbl_Drone.TabIndex = 3;
+            // 
+            // lbl_Port
+            // 
+            this.lbl_Port.AutoSize = true;
+            this.lbl_Port.Location = new System.Drawing.Point(78, 44);
+            this.lbl_Port.Name = "lbl_Port";
+            this.lbl_Port.Size = new System.Drawing.Size(0, 15);
+            this.lbl_Port.TabIndex = 2;
             // 
             // lbldrone
             // 
@@ -236,22 +255,6 @@
             this.lblbattery.Size = new System.Drawing.Size(52, 15);
             this.lblbattery.TabIndex = 10;
             this.lblbattery.Text = "베터리";
-            // 
-            // lbl_Port
-            // 
-            this.lbl_Port.AutoSize = true;
-            this.lbl_Port.Location = new System.Drawing.Point(78, 44);
-            this.lbl_Port.Name = "lbl_Port";
-            this.lbl_Port.Size = new System.Drawing.Size(0, 15);
-            this.lbl_Port.TabIndex = 2;
-            // 
-            // lbl_Drone
-            // 
-            this.lbl_Drone.AutoSize = true;
-            this.lbl_Drone.Location = new System.Drawing.Point(107, 85);
-            this.lbl_Drone.Name = "lbl_Drone";
-            this.lbl_Drone.Size = new System.Drawing.Size(0, 15);
-            this.lbl_Drone.TabIndex = 3;
             // 
             // Main
             // 

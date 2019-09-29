@@ -1,36 +1,34 @@
 import CoDrone
 from CoDrone.protocol import *
-import threading
-import time
 
 drone = CoDrone.CoDrone()
 
-def thgyro():
-   R = 0
-   P = 0
-   while(1):
-      R += drone._data.attitude.ROLL
-      P += drone._data.attitude.PITCH
-      print("ROLL:", drone._data.attitude.ROLL)
-      print("PITCH:", drone._data.attitude.PITCH)
-      print("YAW:", drone._data.attitude.YAW)
-      time.sleep(1)
-   print("R:", R)
-   print("P:", P)
+def dronestate():
+   _stData = []
+   _stData.append(drone.get_drone_temp)
+   _stData.append(drone.get_pressure)
+   _stData.append(drone.get_battery_percentage)
+   return _stData
 
-def main():
-   t1 = threading.Thread(target=thgyro)
-   t1.daemon = True
-   drone.pair()
-   battery = drone.get_battery_percentage()
-   print("battery:", battery)
-   drone.takeoff()
-   t1.start()
-   drone.hover(3)
-   drone.set_pitch(100)
-   drone.move(5)
-   drone.land()
+def thgyro():
+   _attData = []
+   _attData.append(drone._data.attitude.ROLL)
+   _attData.append(drone._data.attitude.PITCH)
+   _attData.append(drone._data.attitude.YAW)
+   return _attData
+
+def connect(port="None", droneN="None"):
+   if not port == "None" or not droneN == "None":
+      drone.pair(droneN, port)
+   else:
+      drone.pair()
+
+def disconnect():
    drone.disconnect()
 
-if __name__ == '__main__':
-   main()
+def moving():
+   drone.takeoff()
+   drone.hover(3)
+   drone.set_pitch(50)
+   drone.move(1)
+   drone.land()
