@@ -6,53 +6,6 @@ from threading import *
 
 drone = CoDrone()
 
-Flag = True
-
-def connect():
-   drone.pair()
-   drone.takeoff()
-   drone.hover()
-
-def disconnect():
-   if drone.isConnected():
-      drone.land()
-      drone.disconnect()
-
-def setPlot():
-   global Flag
-   if Flag:
-      drone.set_plot_sensor(PlotType.gyro)
-      Flag = False
-   else:
-      pass
-
-def drawPlot():
-   if not Flag:
-      drone.draw_plot_sensor()
-      Flag = True
-   else:
-      pass
-
-def moveFront():
-   if drone.isConnected():
-      drone.set_pitch(10)
-      drone.move(1)
-
-def moveBack():
-   if drone.isConnected():
-      drone.set_pitch(-10)
-      drone.move(1)
-
-def moveLeft():
-   if drone.isConnected():
-      drone.set_roll(-10)
-      drone.move(1)
-
-def moveRight():
-   if drone.isConnected():
-      drone.set_roll(10)
-      drone.move(1)
-
 def KeyPress(event):
    pass
 
@@ -77,6 +30,8 @@ class MyFrame(Frame):
       self.acc_X = 0
       self.acc_Y = 0
       self.acc_Z = 0
+      self.Set_P = IntVar()
+      self.Flag = False
 
       frameSta = Frame(self)
       frameSta.pack(fill=X, anchor=W)
@@ -142,20 +97,17 @@ class MyFrame(Frame):
       framePlo = Frame(self)
       framePlo.pack(anchor=W)
 
-      check_S = Checkbutton(framePlo, text="SET PLOT", command=setPlot)
+      check_S = Checkbutton(framePlo, text="SET PLOT", variable=self.Set_P, command=self.setPlot)
       check_S.pack()
-
-      check_D = Checkbutton(framePlo, text="DRAW PLOT", command=drawPlot)
-      check_D.pack()
 
       #Connect_B
       frameCon = Frame(self)
       frameCon.pack()
 
-      button_sta = Button(frameCon, text="Start", command=connect)
+      button_sta = Button(frameCon, text="Start", command=self.connect)
       button_sta.pack()
 
-      button_sto = Button(frameCon, text="Stop", command=disconnect)
+      button_sto = Button(frameCon, text="Stop", command=self.disconnect)
       button_sto.pack()
 
       #button_moving
@@ -163,29 +115,72 @@ class MyFrame(Frame):
       frameUP = Frame(self)
       frameUP.pack(fill=BOTH, ipady=60)
 
-      button_UP = Button(frameUP, width=5, height=2, text="↑", command=moveFront)
+      button_UP = Button(frameUP, width=5, height=2, text="↑", command=self.moveFront)
       button_UP.pack(side=BOTTOM, pady=10)
 
       #LEFT
       frameLE = Frame(self)
       frameLE.pack(fill=BOTH, side=LEFT, expand=1)
 
-      button_LEFT = Button(frameLE, width=5, height=2, text="←", command=moveLeft)
+      button_LEFT = Button(frameLE, width=5, height=2, text="←", command=self.moveLeft)
       button_LEFT.pack(anchor=NE)
 
       #BOTTOM
       frameBO = Frame(self)
       frameBO.pack(fill=BOTH, side=LEFT, expand=1)
 
-      button_BOTTOM = Button(frameBO, width=5, height=2, text="↓", command=moveBack)
+      button_BOTTOM = Button(frameBO, width=5, height=2, text="↓", command=self.moveBack)
       button_BOTTOM.pack()
 
       #RIGHT
       frameRI = Frame(self)
       frameRI.pack(fill=BOTH, side=RIGHT, expand=1)
 
-      button_RIGHT = Button(frameRI, width=5, height=2, text="→", command=moveRight)
+      button_RIGHT = Button(frameRI, width=5, height=2, text="→", command=self.moveRight)
       button_RIGHT.pack(anchor=NW)
+
+   def connect(self):
+      drone.pair()
+      drone.takeoff()
+      drone.hover(0)
+
+   def disconnect(self):
+      if drone.isConnected():
+         drone.land()
+         drone.disconnect()
+         if self.Flag:
+            drone.draw_plot_sensor()
+   
+   def setPlot(self):
+      if self.Set_P.get() == 1:
+         drone.set_plot_sensor(PlotType.gyro)
+         self.Flag = True
+      else:
+         self.Flag = False
+
+   def moveFront(self):
+      if drone.isConnected():
+         drone.set_pitch(20)
+         drone.move(1)
+         drone.hover(0)
+
+   def moveBack(self):
+      if drone.isConnected():
+         drone.set_pitch(-20)
+         drone.move(1)
+         drone.hover(0)
+
+   def moveLeft(self):
+      if drone.isConnected():
+         drone.set_roll(-20)
+         drone.move(1)
+         drone.hover(0)
+
+   def moveRight(self):
+      if drone.isConnected():
+         drone.set_roll(20)
+         drone.move(1)
+         drone.hover(0)
 
    def droneStat(self):
       if drone.isConnected():
