@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBox_DroneNevi = new System.Windows.Forms.PictureBox();
             this.rTB_position = new System.Windows.Forms.RichTextBox();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.PBar_temp = new CircularProgressBar.CircularProgressBar();
-            this.PBar_pressure = new CircularProgressBar.CircularProgressBar();
-            this.PBar_battery = new CircularProgressBar.CircularProgressBar();
-            this.Bt_DroneStart = new System.Windows.Forms.Button();
-            this.Bt_EmergencyStop = new System.Windows.Forms.Button();
+            this.Bt_Connect = new System.Windows.Forms.Button();
+            this.Bt_Disconnect = new System.Windows.Forms.Button();
             this.GB_DroneState = new System.Windows.Forms.GroupBox();
-            this.lbl_Drone = new System.Windows.Forms.Label();
-            this.lbl_Port = new System.Windows.Forms.Label();
-            this.lbldrone = new System.Windows.Forms.Label();
-            this.lblport = new System.Windows.Forms.Label();
+            this.bt_zigzag = new System.Windows.Forms.Button();
+            this.bt_sway = new System.Windows.Forms.Button();
+            this.bt_hop = new System.Windows.Forms.Button();
+            this.bt_triangle = new System.Windows.Forms.Button();
+            this.bt_spiral = new System.Windows.Forms.Button();
+            this.bt_circle = new System.Windows.Forms.Button();
+            this.bt_square = new System.Windows.Forms.Button();
             this.lbltemp = new System.Windows.Forms.Label();
             this.lblpressure = new System.Windows.Forms.Label();
             this.lblbattery = new System.Windows.Forms.Label();
+            this.lbl_temp = new System.Windows.Forms.Label();
+            this.lbl_press = new System.Windows.Forms.Label();
+            this.lbl_battery = new System.Windows.Forms.Label();
+            this.stat_light = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DroneNevi)).BeginInit();
             this.GB_DroneState.SuspendLayout();
             this.SuspendLayout();
@@ -65,129 +67,35 @@
             this.rTB_position.TabIndex = 1;
             this.rTB_position.Text = "";
             // 
-            // serialPort1
+            // Bt_Connect
             // 
-            this.serialPort1.BaudRate = 115200;
+            this.Bt_Connect.Location = new System.Drawing.Point(681, 568);
+            this.Bt_Connect.Name = "Bt_Connect";
+            this.Bt_Connect.Size = new System.Drawing.Size(125, 59);
+            this.Bt_Connect.TabIndex = 5;
+            this.Bt_Connect.Text = "CONNECT";
+            this.Bt_Connect.UseVisualStyleBackColor = true;
+            this.Bt_Connect.Click += new System.EventHandler(this.Bt_Connect_Click);
             // 
-            // PBar_temp
+            // Bt_Disconnect
             // 
-            this.PBar_temp.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
-            this.PBar_temp.AnimationSpeed = 500;
-            this.PBar_temp.BackColor = System.Drawing.Color.Transparent;
-            this.PBar_temp.Font = new System.Drawing.Font("굴림", 72F, System.Drawing.FontStyle.Bold);
-            this.PBar_temp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PBar_temp.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.PBar_temp.InnerMargin = 2;
-            this.PBar_temp.InnerWidth = -1;
-            this.PBar_temp.Location = new System.Drawing.Point(851, 568);
-            this.PBar_temp.MarqueeAnimationSpeed = 2000;
-            this.PBar_temp.Name = "PBar_temp";
-            this.PBar_temp.OuterColor = System.Drawing.Color.Gray;
-            this.PBar_temp.OuterMargin = -25;
-            this.PBar_temp.OuterWidth = 25;
-            this.PBar_temp.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.PBar_temp.ProgressWidth = 25;
-            this.PBar_temp.SecondaryFont = new System.Drawing.Font("굴림", 36F);
-            this.PBar_temp.Size = new System.Drawing.Size(100, 100);
-            this.PBar_temp.StartAngle = 270;
-            this.PBar_temp.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_temp.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
-            this.PBar_temp.SubscriptText = ".23";
-            this.PBar_temp.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_temp.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
-            this.PBar_temp.SuperscriptText = "°C";
-            this.PBar_temp.TabIndex = 2;
-            this.PBar_temp.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            this.PBar_temp.Value = 68;
-            // 
-            // PBar_pressure
-            // 
-            this.PBar_pressure.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
-            this.PBar_pressure.AnimationSpeed = 500;
-            this.PBar_pressure.BackColor = System.Drawing.Color.Transparent;
-            this.PBar_pressure.Font = new System.Drawing.Font("굴림", 72F, System.Drawing.FontStyle.Bold);
-            this.PBar_pressure.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PBar_pressure.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.PBar_pressure.InnerMargin = 2;
-            this.PBar_pressure.InnerWidth = -1;
-            this.PBar_pressure.Location = new System.Drawing.Point(951, 568);
-            this.PBar_pressure.MarqueeAnimationSpeed = 2000;
-            this.PBar_pressure.Name = "PBar_pressure";
-            this.PBar_pressure.OuterColor = System.Drawing.Color.Gray;
-            this.PBar_pressure.OuterMargin = -25;
-            this.PBar_pressure.OuterWidth = 25;
-            this.PBar_pressure.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.PBar_pressure.ProgressWidth = 25;
-            this.PBar_pressure.SecondaryFont = new System.Drawing.Font("굴림", 36F);
-            this.PBar_pressure.Size = new System.Drawing.Size(100, 100);
-            this.PBar_pressure.StartAngle = 270;
-            this.PBar_pressure.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_pressure.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
-            this.PBar_pressure.SubscriptText = ".23";
-            this.PBar_pressure.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_pressure.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
-            this.PBar_pressure.SuperscriptText = "°C";
-            this.PBar_pressure.TabIndex = 3;
-            this.PBar_pressure.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            this.PBar_pressure.Value = 68;
-            // 
-            // PBar_battery
-            // 
-            this.PBar_battery.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
-            this.PBar_battery.AnimationSpeed = 500;
-            this.PBar_battery.BackColor = System.Drawing.Color.Transparent;
-            this.PBar_battery.Font = new System.Drawing.Font("굴림", 72F, System.Drawing.FontStyle.Bold);
-            this.PBar_battery.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PBar_battery.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.PBar_battery.InnerMargin = 2;
-            this.PBar_battery.InnerWidth = -1;
-            this.PBar_battery.Location = new System.Drawing.Point(1051, 568);
-            this.PBar_battery.MarqueeAnimationSpeed = 2000;
-            this.PBar_battery.Name = "PBar_battery";
-            this.PBar_battery.OuterColor = System.Drawing.Color.Gray;
-            this.PBar_battery.OuterMargin = -25;
-            this.PBar_battery.OuterWidth = 25;
-            this.PBar_battery.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.PBar_battery.ProgressWidth = 25;
-            this.PBar_battery.SecondaryFont = new System.Drawing.Font("굴림", 36F);
-            this.PBar_battery.Size = new System.Drawing.Size(100, 100);
-            this.PBar_battery.StartAngle = 270;
-            this.PBar_battery.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_battery.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
-            this.PBar_battery.SubscriptText = ".23";
-            this.PBar_battery.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.PBar_battery.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
-            this.PBar_battery.SuperscriptText = "°C";
-            this.PBar_battery.TabIndex = 4;
-            this.PBar_battery.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            this.PBar_battery.Value = 68;
-            // 
-            // Bt_DroneStart
-            // 
-            this.Bt_DroneStart.Location = new System.Drawing.Point(681, 568);
-            this.Bt_DroneStart.Name = "Bt_DroneStart";
-            this.Bt_DroneStart.Size = new System.Drawing.Size(125, 59);
-            this.Bt_DroneStart.TabIndex = 5;
-            this.Bt_DroneStart.Text = "START";
-            this.Bt_DroneStart.UseVisualStyleBackColor = true;
-            this.Bt_DroneStart.Click += new System.EventHandler(this.Bt_DroneStart_Click);
-            // 
-            // Bt_EmergencyStop
-            // 
-            this.Bt_EmergencyStop.Location = new System.Drawing.Point(681, 650);
-            this.Bt_EmergencyStop.Name = "Bt_EmergencyStop";
-            this.Bt_EmergencyStop.Size = new System.Drawing.Size(125, 59);
-            this.Bt_EmergencyStop.TabIndex = 6;
-            this.Bt_EmergencyStop.Text = "STOP";
-            this.Bt_EmergencyStop.UseVisualStyleBackColor = true;
-            this.Bt_EmergencyStop.Click += new System.EventHandler(this.Bt_EmergencyStop_Click);
+            this.Bt_Disconnect.Location = new System.Drawing.Point(681, 650);
+            this.Bt_Disconnect.Name = "Bt_Disconnect";
+            this.Bt_Disconnect.Size = new System.Drawing.Size(125, 59);
+            this.Bt_Disconnect.TabIndex = 6;
+            this.Bt_Disconnect.Text = "DISCONNECT";
+            this.Bt_Disconnect.UseVisualStyleBackColor = true;
+            this.Bt_Disconnect.Click += new System.EventHandler(this.Bt_DisConnect_Click);
             // 
             // GB_DroneState
             // 
-            this.GB_DroneState.Controls.Add(this.lbl_Drone);
-            this.GB_DroneState.Controls.Add(this.lbl_Port);
-            this.GB_DroneState.Controls.Add(this.lbldrone);
-            this.GB_DroneState.Controls.Add(this.lblport);
+            this.GB_DroneState.Controls.Add(this.bt_zigzag);
+            this.GB_DroneState.Controls.Add(this.bt_sway);
+            this.GB_DroneState.Controls.Add(this.bt_hop);
+            this.GB_DroneState.Controls.Add(this.bt_triangle);
+            this.GB_DroneState.Controls.Add(this.bt_spiral);
+            this.GB_DroneState.Controls.Add(this.bt_circle);
+            this.GB_DroneState.Controls.Add(this.bt_square);
             this.GB_DroneState.Location = new System.Drawing.Point(12, 568);
             this.GB_DroneState.Name = "GB_DroneState";
             this.GB_DroneState.Size = new System.Drawing.Size(653, 141);
@@ -195,44 +103,80 @@
             this.GB_DroneState.TabStop = false;
             this.GB_DroneState.Text = "Drone_State";
             // 
-            // lbl_Drone
+            // bt_zigzag
             // 
-            this.lbl_Drone.AutoSize = true;
-            this.lbl_Drone.Location = new System.Drawing.Point(107, 85);
-            this.lbl_Drone.Name = "lbl_Drone";
-            this.lbl_Drone.Size = new System.Drawing.Size(0, 15);
-            this.lbl_Drone.TabIndex = 3;
+            this.bt_zigzag.Location = new System.Drawing.Point(311, 40);
+            this.bt_zigzag.Name = "bt_zigzag";
+            this.bt_zigzag.Size = new System.Drawing.Size(91, 34);
+            this.bt_zigzag.TabIndex = 0;
+            this.bt_zigzag.Text = "ZIGZAG";
+            this.bt_zigzag.UseVisualStyleBackColor = true;
+            this.bt_zigzag.Click += new System.EventHandler(this.Bt_zigzag_Click);
             // 
-            // lbl_Port
+            // bt_sway
             // 
-            this.lbl_Port.AutoSize = true;
-            this.lbl_Port.Location = new System.Drawing.Point(78, 44);
-            this.lbl_Port.Name = "lbl_Port";
-            this.lbl_Port.Size = new System.Drawing.Size(0, 15);
-            this.lbl_Port.TabIndex = 2;
+            this.bt_sway.Location = new System.Drawing.Point(214, 88);
+            this.bt_sway.Name = "bt_sway";
+            this.bt_sway.Size = new System.Drawing.Size(91, 34);
+            this.bt_sway.TabIndex = 0;
+            this.bt_sway.Text = "SWAY";
+            this.bt_sway.UseVisualStyleBackColor = true;
+            this.bt_sway.Click += new System.EventHandler(this.Bt_sway_Click);
             // 
-            // lbldrone
+            // bt_hop
             // 
-            this.lbldrone.AutoSize = true;
-            this.lbldrone.Location = new System.Drawing.Point(25, 85);
-            this.lbldrone.Name = "lbldrone";
-            this.lbldrone.Size = new System.Drawing.Size(82, 15);
-            this.lbldrone.TabIndex = 1;
-            this.lbldrone.Text = "드론 번호 :";
+            this.bt_hop.Location = new System.Drawing.Point(214, 40);
+            this.bt_hop.Name = "bt_hop";
+            this.bt_hop.Size = new System.Drawing.Size(91, 34);
+            this.bt_hop.TabIndex = 0;
+            this.bt_hop.Text = "HOP";
+            this.bt_hop.UseVisualStyleBackColor = true;
+            this.bt_hop.Click += new System.EventHandler(this.Bt_hop_Click);
             // 
-            // lblport
+            // bt_triangle
             // 
-            this.lblport.AutoSize = true;
-            this.lblport.Location = new System.Drawing.Point(25, 44);
-            this.lblport.Name = "lblport";
-            this.lblport.Size = new System.Drawing.Size(47, 15);
-            this.lblport.TabIndex = 0;
-            this.lblport.Text = "포트 :";
+            this.bt_triangle.Location = new System.Drawing.Point(117, 88);
+            this.bt_triangle.Name = "bt_triangle";
+            this.bt_triangle.Size = new System.Drawing.Size(91, 34);
+            this.bt_triangle.TabIndex = 0;
+            this.bt_triangle.Text = "TRIANGLE";
+            this.bt_triangle.UseVisualStyleBackColor = true;
+            this.bt_triangle.Click += new System.EventHandler(this.Bt_triangle_Click);
+            // 
+            // bt_spiral
+            // 
+            this.bt_spiral.Location = new System.Drawing.Point(117, 40);
+            this.bt_spiral.Name = "bt_spiral";
+            this.bt_spiral.Size = new System.Drawing.Size(91, 34);
+            this.bt_spiral.TabIndex = 0;
+            this.bt_spiral.Text = "SPIRAL";
+            this.bt_spiral.UseVisualStyleBackColor = true;
+            this.bt_spiral.Click += new System.EventHandler(this.Bt_spiral_Click);
+            // 
+            // bt_circle
+            // 
+            this.bt_circle.Location = new System.Drawing.Point(20, 88);
+            this.bt_circle.Name = "bt_circle";
+            this.bt_circle.Size = new System.Drawing.Size(91, 34);
+            this.bt_circle.TabIndex = 0;
+            this.bt_circle.Text = "CIRCLE";
+            this.bt_circle.UseVisualStyleBackColor = true;
+            this.bt_circle.Click += new System.EventHandler(this.Bt_circle_Click);
+            // 
+            // bt_square
+            // 
+            this.bt_square.Location = new System.Drawing.Point(20, 40);
+            this.bt_square.Name = "bt_square";
+            this.bt_square.Size = new System.Drawing.Size(91, 34);
+            this.bt_square.TabIndex = 0;
+            this.bt_square.Text = "SQUARE";
+            this.bt_square.UseVisualStyleBackColor = true;
+            this.bt_square.Click += new System.EventHandler(this.Bt_square_Click);
             // 
             // lbltemp
             // 
             this.lbltemp.AutoSize = true;
-            this.lbltemp.Location = new System.Drawing.Point(887, 683);
+            this.lbltemp.Location = new System.Drawing.Point(1112, 590);
             this.lbltemp.Name = "lbltemp";
             this.lbltemp.Size = new System.Drawing.Size(37, 15);
             this.lbltemp.TabIndex = 8;
@@ -241,7 +185,7 @@
             // lblpressure
             // 
             this.lblpressure.AutoSize = true;
-            this.lblpressure.Location = new System.Drawing.Point(986, 683);
+            this.lblpressure.Location = new System.Drawing.Point(1112, 634);
             this.lblpressure.Name = "lblpressure";
             this.lblpressure.Size = new System.Drawing.Size(37, 15);
             this.lblpressure.TabIndex = 9;
@@ -250,26 +194,66 @@
             // lblbattery
             // 
             this.lblbattery.AutoSize = true;
-            this.lblbattery.Location = new System.Drawing.Point(1078, 683);
+            this.lblbattery.Location = new System.Drawing.Point(1112, 675);
             this.lblbattery.Name = "lblbattery";
             this.lblbattery.Size = new System.Drawing.Size(52, 15);
             this.lblbattery.TabIndex = 10;
             this.lblbattery.Text = "베터리";
+            // 
+            // lbl_temp
+            // 
+            this.lbl_temp.BackColor = System.Drawing.Color.Gray;
+            this.lbl_temp.Location = new System.Drawing.Point(1015, 586);
+            this.lbl_temp.Name = "lbl_temp";
+            this.lbl_temp.Size = new System.Drawing.Size(80, 23);
+            this.lbl_temp.TabIndex = 11;
+            this.lbl_temp.Text = "0 C";
+            this.lbl_temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_press
+            // 
+            this.lbl_press.BackColor = System.Drawing.Color.Gray;
+            this.lbl_press.Location = new System.Drawing.Point(1015, 630);
+            this.lbl_press.Name = "lbl_press";
+            this.lbl_press.Size = new System.Drawing.Size(80, 23);
+            this.lbl_press.TabIndex = 11;
+            this.lbl_press.Text = "0";
+            this.lbl_press.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_battery
+            // 
+            this.lbl_battery.BackColor = System.Drawing.Color.Gray;
+            this.lbl_battery.Location = new System.Drawing.Point(1015, 671);
+            this.lbl_battery.Name = "lbl_battery";
+            this.lbl_battery.Size = new System.Drawing.Size(80, 23);
+            this.lbl_battery.TabIndex = 11;
+            this.lbl_battery.Text = "0 %";
+            this.lbl_battery.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // stat_light
+            // 
+            this.stat_light.BackColor = System.Drawing.Color.Goldenrod;
+            this.stat_light.Location = new System.Drawing.Point(871, 608);
+            this.stat_light.Name = "stat_light";
+            this.stat_light.Size = new System.Drawing.Size(75, 60);
+            this.stat_light.TabIndex = 12;
+            this.stat_light.UseVisualStyleBackColor = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1221, 736);
+            this.Controls.Add(this.stat_light);
+            this.Controls.Add(this.lbl_battery);
+            this.Controls.Add(this.lbl_press);
+            this.Controls.Add(this.lbl_temp);
             this.Controls.Add(this.lblbattery);
             this.Controls.Add(this.lblpressure);
             this.Controls.Add(this.lbltemp);
             this.Controls.Add(this.GB_DroneState);
-            this.Controls.Add(this.Bt_EmergencyStop);
-            this.Controls.Add(this.Bt_DroneStart);
-            this.Controls.Add(this.PBar_battery);
-            this.Controls.Add(this.PBar_pressure);
-            this.Controls.Add(this.PBar_temp);
+            this.Controls.Add(this.Bt_Disconnect);
+            this.Controls.Add(this.Bt_Connect);
             this.Controls.Add(this.rTB_position);
             this.Controls.Add(this.pictureBox_DroneNevi);
             this.MaximizeBox = false;
@@ -281,7 +265,6 @@
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DroneNevi)).EndInit();
             this.GB_DroneState.ResumeLayout(false);
-            this.GB_DroneState.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,20 +274,23 @@
 
         private System.Windows.Forms.PictureBox pictureBox_DroneNevi;
         private System.Windows.Forms.RichTextBox rTB_position;
-        private System.IO.Ports.SerialPort serialPort1;
-        private CircularProgressBar.CircularProgressBar PBar_temp;
-        private CircularProgressBar.CircularProgressBar PBar_pressure;
-        private CircularProgressBar.CircularProgressBar PBar_battery;
-        private System.Windows.Forms.Button Bt_DroneStart;
-        private System.Windows.Forms.Button Bt_EmergencyStop;
+        private System.Windows.Forms.Button Bt_Connect;
+        private System.Windows.Forms.Button Bt_Disconnect;
         private System.Windows.Forms.GroupBox GB_DroneState;
-        private System.Windows.Forms.Label lbldrone;
-        private System.Windows.Forms.Label lblport;
         private System.Windows.Forms.Label lbltemp;
         private System.Windows.Forms.Label lblpressure;
         private System.Windows.Forms.Label lblbattery;
-        private System.Windows.Forms.Label lbl_Drone;
-        private System.Windows.Forms.Label lbl_Port;
+        private System.Windows.Forms.Label lbl_temp;
+        private System.Windows.Forms.Label lbl_press;
+        private System.Windows.Forms.Label lbl_battery;
+        private System.Windows.Forms.Button stat_light;
+        private System.Windows.Forms.Button bt_zigzag;
+        private System.Windows.Forms.Button bt_sway;
+        private System.Windows.Forms.Button bt_hop;
+        private System.Windows.Forms.Button bt_triangle;
+        private System.Windows.Forms.Button bt_spiral;
+        private System.Windows.Forms.Button bt_circle;
+        private System.Windows.Forms.Button bt_square;
     }
 }
 
