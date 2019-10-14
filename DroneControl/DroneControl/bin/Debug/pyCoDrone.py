@@ -191,6 +191,7 @@ class MyFrame(Frame):
 
    def droneAtti(self):
       if drone.isConnected():
+         #get_gyro_angles()
          self.attitude_R = drone._data.attitude.ROLL
          self.attitude_P = drone._data.attitude.PITCH
          self.attitude_Y = drone._data.attitude.YAW
@@ -198,6 +199,7 @@ class MyFrame(Frame):
 
    def droneAngl(self):
       if drone.isConnected():
+         #get_angular_speed()
          self.angle_R = drone._data.gyro.ROLL
          self.angle_P = drone._data.gyro.PITCH
          self.angle_Y = drone._data.gyro.YAW
@@ -205,6 +207,7 @@ class MyFrame(Frame):
 
    def droneAcce(self):
       if drone.isConnected():
+         #get_accelerometer()
          self.acc_X = drone._data.accel.X
          self.acc_Y = drone._data.accel.Y
          self.acc_Z = drone._data.accel.Z
