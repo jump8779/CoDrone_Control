@@ -52,12 +52,13 @@ class sendData(Structure):
 class sequData(Structure):
     _pack_ = 1
     _fields_ = [
-        ("sequence",c_int)
+        ("sequence", c_int)
     ]
 
 drone = CoDrone()
 IsConnected = False
 senD = sendData()
+seqD = sequData()
 
 try:
     ser_socket = socket(AF_INET, SOCK_STREAM)
@@ -73,37 +74,37 @@ except Exception as ex:
 def sequenceMove(st):
     if st == 0:
         pass
-    elif st == 1:
+    elif st == 10001:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.SQUARE)
         drone.land()
-    elif st == 2:
+    elif st == 10002:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.CIRCLE)
         drone.land()
-    elif st == 3:
+    elif st == 10003:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.SPIRAL)
         drone.land()
-    elif st == 4:
+    elif st == 10004:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.TRIANGLE)
         drone.land()
-    elif st == 5:
+    elif st == 10005:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.HOP)
         drone.land()
-    elif st == 6:
+    elif st == 10006:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.SWAY)
         drone.land()
-    elif st == 7:
+    elif st == 10007:
         drone.takeoff()
         drone.hover(3)
         drone.fly_sequence(Sequence.ZIGZAG)
@@ -112,10 +113,22 @@ def sequenceMove(st):
 def recvD():
     nstat = 0
     ostat = 0
-    seqD = sequData()
 
     while IsConnected:
-        seqD = cliSock.recv(sizeof(sequData))
+        # buf = cliSock.recv(sizeof(sequData))
+        # print(buf)
+        # if len(buf) < sizeof(sequData):
+        #     print("error: bytearray is too short for sequData")
+        #     return
+        # buf2 = sequData.from_buffer(buf)
+
+        # nstat = format(buf2.sequence)
+        # if ostat != nstat:
+        #     sequenceMove(nstat)
+        # ostat = nstat
+        
+        cliSock.recv_into(seqD)
+        print(seqD.sequence)
         nstat = seqD.sequence
         if ostat != nstat:
             sequenceMove(nstat)
@@ -126,9 +139,9 @@ def sendD():
         senD.statD.battery_p = drone.get_battery_percentage()
         senD.statD.temp = drone.get_drone_temp()
         senD.statD.pressure = drone.get_pressure()
-        senD.attiD.attROLL = drone._data.attitude.ROLL
-        senD.attiD.attPITCH = drone._data.attitude.PITCH
-        senD.attiD.attYAW = drone._data.attitude.YAW
+        senD.attiD.attROLL = drone.get_gyro_angles().ROLL
+        senD.attiD.attPITCH = drone.get_gyro_angles().PITCH
+        senD.attiD.attYAW = drone.get_gyro_angles().YAW
         senD.moveD.getR = drone.get_roll()
         senD.moveD.getP = drone.get_pitch()
         senD.moveD.getY = drone.get_yaw()

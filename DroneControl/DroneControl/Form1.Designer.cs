@@ -63,7 +63,7 @@
             // 
             this.rTB_position.Location = new System.Drawing.Point(764, 13);
             this.rTB_position.Name = "rTB_position";
-            this.rTB_position.Size = new System.Drawing.Size(445, 534);
+            this.rTB_position.Size = new System.Drawing.Size(445, 62);
             this.rTB_position.TabIndex = 1;
             this.rTB_position.Text = "";
             // 

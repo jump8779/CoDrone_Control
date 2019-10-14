@@ -65,6 +65,7 @@ namespace DroneControl
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct sequData
         {
+            //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             public int sequence;
         }
         //byte를 struct로
@@ -105,17 +106,12 @@ namespace DroneControl
         }
         private void AttiLog(int ROLL, int PITCH, int YAW)
         {
+            rTB_position.Clear();
             string atti = "ROLL : " + ROLL + " PITCH : "
                         + PITCH + " YAW : " + YAW + "\r\n";
 
             rTB_position.AppendText(atti);
             rTB_position.AppendText("\r\n");
-            //입력된 텍스트에 맞게 스크롤을 내려준다
-            this.Activate();
-            rTB_position.Focus();
-            //캐럿(커서)를 텍스트박스의 끝으로 내려준다
-            rTB_position.SelectionStart = rTB_position.Text.Length;
-            rTB_position.ScrollToCaret(); //스크롤을 캐럿위치에 맞춰준다
         }
         private void DrawingD(int ROLL, int PITCH)
         {
@@ -158,28 +154,29 @@ namespace DroneControl
             X = pictureBoxBmp.Width / 2;
             Y = pictureBoxBmp.Height / 4;
             sequData SendD = new sequData();
-            switch (s)
+            string[] c = s.ToString().Split(':');
+            switch (c[1].Trim())
             {
                 case "SQUARE":
-                    SendD.sequence = 1;
+                    SendD.sequence = 10001;
                     break;
                 case "CIRCLE":
-                    SendD.sequence = 2;
+                    SendD.sequence = 10002;
                     break;
                 case "SPIRAL":
-                    SendD.sequence = 3;
+                    SendD.sequence = 10003;
                     break;
                 case "TRIANGLE":
-                    SendD.sequence = 4;
+                    SendD.sequence = 10004;
                     break;
                 case "HOP":
-                    SendD.sequence = 5;
+                    SendD.sequence = 10005;
                     break;
                 case "SWAY":
-                    SendD.sequence = 6;
+                    SendD.sequence = 10006;
                     break;
                 case "ZIGZAG":
-                    SendD.sequence = 7;
+                    SendD.sequence = 10007;
                     break;
             }
             try
