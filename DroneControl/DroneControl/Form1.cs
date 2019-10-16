@@ -28,7 +28,7 @@ namespace DroneControl
         private Boolean IsConnected = false;
         private NetworkStream cNts;
         private Thread ReadTh;
-        int YAW;
+        int gYAW;
         float X, Y;
 
         Bitmap pictureBoxBmp;
@@ -119,20 +119,20 @@ namespace DroneControl
             p.Width = 8;
 
             Graphics g = Graphics.FromImage(pictureBoxBmp);
-            if(Math.Abs(YAW) > 90)
+            if (Math.Abs(gYAW) > 90)
             {
                 double dX, dY;
-                dX = PITCH * Math.Sin(YAW);
-                dY = PITCH * Math.Cos(YAW);
+                dX = PITCH * Math.Sin(gYAW);
+                dY = PITCH * Math.Cos(gYAW);
                 g.DrawLine(p, X, Y, X + (float)dX, Y - (float)dY);
                 X += (float)dX;
                 Y -= (float)dY;
             }
-            else if(YAW != 0)
+            else if (gYAW != 0)
             {
                 double dX, dY;
-                dX = PITCH * Math.Sin(YAW);
-                dY = PITCH * Math.Cos(YAW);
+                dX = PITCH * Math.Sin(gYAW);
+                dY = PITCH * Math.Cos(gYAW);
                 g.DrawLine(p, X, Y, X + (float)dX, Y + (float)dY);
                 X += (float)dX;
                 Y += (float)dY;
@@ -143,6 +143,7 @@ namespace DroneControl
                 X += ROLL;
                 Y += PITCH;
             }
+
             pictureBox_DroneNevi.Image = pictureBoxBmp;
 
             p.Dispose();
@@ -150,9 +151,8 @@ namespace DroneControl
         }
         private void SendSequ(object s)
         {
-            pictureBox_DroneNevi.Refresh();
             X = pictureBoxBmp.Width / 2;
-            Y = pictureBoxBmp.Height / 4;
+            Y = pictureBoxBmp.Height * 3 / 4;
             sequData SendD = new sequData();
             string[] c = s.ToString().Split(':');
             switch (c[1].Trim())
@@ -160,23 +160,29 @@ namespace DroneControl
                 case "SQUARE":
                     SendD.sequence = 10001;
                     break;
-                case "CIRCLE":
+                case "SPIRAL":
                     SendD.sequence = 10002;
                     break;
-                case "SPIRAL":
+                case "TRIANGLE":
                     SendD.sequence = 10003;
                     break;
-                case "TRIANGLE":
+                case "HOP":
                     SendD.sequence = 10004;
                     break;
-                case "HOP":
+                case "SWAY":
                     SendD.sequence = 10005;
                     break;
-                case "SWAY":
+                case "ZIGZAG":
                     SendD.sequence = 10006;
                     break;
-                case "ZIGZAG":
-                    SendD.sequence = 10007;
+                case "패턴 A":
+                    SendD.sequence = 20001;
+                    break;
+                case "패턴 B":
+                    SendD.sequence = 20002;
+                    break;
+                case "패턴 C":
+                    SendD.sequence = 20003;
                     break;
             }
             try
@@ -196,7 +202,7 @@ namespace DroneControl
             recvData RecvD;
             int size = Marshal.SizeOf(typeof(recvData));
             byte[] data = new byte[size];
-            short oldgetR = 0, oldgetP = 0, oldgetY = 0, oldgetT = 0;
+            short oldgetR = 0, oldgetP = 0;
             try
             {
                 while (IsConnected)
@@ -208,11 +214,17 @@ namespace DroneControl
                     lbl_temp.Text = RecvD.statD.temp + " C";
                     lbl_press.Text = RecvD.statD.pressure + " hPa";
 
+                    lbl_rol.Text = RecvD.moveD.getR.ToString();
+                    lbl_pit.Text = RecvD.moveD.getP.ToString();
+                    lbl_yaw.Text = RecvD.moveD.getY.ToString();
+                    lbl_thr.Text = RecvD.moveD.getT.ToString();
+
+                    gYAW = RecvD.moveD.getY;
 
                     AttiLog(RecvD.attiD.attROLL, RecvD.attiD.attPITCH, RecvD.attiD.attYAW);
-                    if (oldgetR != RecvD.moveD.getR && oldgetP != RecvD.moveD.getP)
+                    if (oldgetR != RecvD.moveD.getR || oldgetP != RecvD.moveD.getP)
                     {
-                        DrawingD(RecvD.moveD.getR, RecvD.moveD.getP);
+                        //DrawingD(RecvD.moveD.getR, RecvD.moveD.getP);
                         oldgetR = RecvD.moveD.getR;
                         oldgetP = RecvD.moveD.getP;
                     }
@@ -220,8 +232,10 @@ namespace DroneControl
                     {
                         stat_light.BackColor = Color.Red;
                     }
-
-                    YAW = RecvD.moveD.getY;
+                    else
+                    {
+                        stat_light.BackColor = Color.Green;
+                    }
 
                     Array.Clear(data, 0, size);
                 }
@@ -238,6 +252,7 @@ namespace DroneControl
             ReadTh.Join();
             cNts.Close();
             cSocket.Close();
+            stat_light.BackColor = Color.Goldenrod;
         }
         private void Main_Load(object sender, EventArgs e)
         {
@@ -293,17 +308,24 @@ namespace DroneControl
             SendSequ(sender);
         }
 
-        private void Bt_circle_Click(object sender, EventArgs e)
-        {
-            SendSequ(sender);
-        }
-
         private void Bt_triangle_Click(object sender, EventArgs e)
         {
             SendSequ(sender);
         }
 
         private void Bt_sway_Click(object sender, EventArgs e)
+        {
+            SendSequ(sender);
+        }
+        private void Bt_A_Click(object sender, EventArgs e)
+        {
+            SendSequ(sender);
+        }
+        private void Bt_B_Click(object sender, EventArgs e)
+        {
+            SendSequ(sender);
+        }
+        private void Bt_C_Click(object sender, EventArgs e)
         {
             SendSequ(sender);
         }

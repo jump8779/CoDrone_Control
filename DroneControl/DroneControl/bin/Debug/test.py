@@ -82,72 +82,113 @@ def sequenceMove(st):
     elif st == 10002:
         drone.takeoff()
         drone.hover(3)
-        drone.fly_sequence(Sequence.CIRCLE)
+        drone.fly_sequence(Sequence.SPIRAL)
         drone.land()
     elif st == 10003:
         drone.takeoff()
         drone.hover(3)
-        drone.fly_sequence(Sequence.SPIRAL)
+        drone.fly_sequence(Sequence.TRIANGLE)
         drone.land()
     elif st == 10004:
         drone.takeoff()
         drone.hover(3)
-        drone.fly_sequence(Sequence.TRIANGLE)
+        drone.fly_sequence(Sequence.HOP)
         drone.land()
     elif st == 10005:
         drone.takeoff()
         drone.hover(3)
-        drone.fly_sequence(Sequence.HOP)
+        drone.fly_sequence(Sequence.SWAY)
         drone.land()
     elif st == 10006:
         drone.takeoff()
         drone.hover(3)
-        drone.fly_sequence(Sequence.SWAY)
-        drone.land()
-    elif st == 10007:
-        drone.takeoff()
-        drone.hover(3)
         drone.fly_sequence(Sequence.ZIGZAG)
         drone.land()
+    elif st == 20001:
+        drone.takeoff()
+        drone.hover(3)
+
+        drone.set_roll(50)
+        drone.move(1)
+        drone.set_roll(0)
+        drone.set_pitch(50)
+        drone.move(1)
+        drone.set_pitch(0)
+        drone.set_roll(-50)
+        drone.move(1)
+        drone.set_roll(0)
+        drone.set_pitch(50)
+        drone.move(1)
+        drone.set_pitch(0)
+        drone.set_roll(50)
+        drone.move(1)
+        drone.set_pitch(-100)
+        drone.set_roll(-50)
+        drone.move(1)
+
+        drone.land()
+    elif st == 20002:
+        drone.takeoff()
+        drone.hover(3)
+
+        drone.set_yaw(-60)
+        drone.set_roll(70)
+        drone.move(4)
+
+        drone.land()
+    elif st == 20003:
+        drone.takeoff()
+        drone.hover(3)
+
+        for i in [0, 3]:
+            drone.set_yaw(-90)
+            drone.move(1)
+            drone.set_yaw(0)
+            drone.set_pitch(50)
+            drone.move(1)
+            drone.set_pitch(0)
+            drone.rotate180()
+            drone.set_pitch(50)
+            drone.move(1)
+            drone.set_pitch(0)
+            if i != 2:
+                drone.set_yaw(-90)
+                drone.move(1)
+                drone.set_yaw(0)
+                drone.set_pitch(40)
+                drone.move(1)
+                drone.set_pitch(0)
 
 def recvD():
     nstat = 0
     ostat = 0
 
-    while IsConnected:
-        # buf = cliSock.recv(sizeof(sequData))
-        # print(buf)
-        # if len(buf) < sizeof(sequData):
-        #     print("error: bytearray is too short for sequData")
-        #     return
-        # buf2 = sequData.from_buffer(buf)
-
-        # nstat = format(buf2.sequence)
-        # if ostat != nstat:
-        #     sequenceMove(nstat)
-        # ostat = nstat
-        
-        cliSock.recv_into(seqD)
-        print(seqD.sequence)
-        nstat = seqD.sequence
-        if ostat != nstat:
-            sequenceMove(nstat)
-        ostat = nstat
+    if IsConnected:
+        while drone.isConnected():
+            cliSock.recv_into(seqD)
+            nstat = seqD.sequence
+            if ostat != nstat:
+                print(seqD.sequence)
+                sequenceMove(nstat)
+            ostat = nstat
 
 def sendD():
-    while IsConnected:
-        senD.statD.battery_p = drone.get_battery_percentage()
-        senD.statD.temp = drone.get_drone_temp()
-        senD.statD.pressure = drone.get_pressure()
-        senD.attiD.attROLL = drone.get_gyro_angles().ROLL
-        senD.attiD.attPITCH = drone.get_gyro_angles().PITCH
-        senD.attiD.attYAW = drone.get_gyro_angles().YAW
-        senD.moveD.getR = drone.get_roll()
-        senD.moveD.getP = drone.get_pitch()
-        senD.moveD.getY = drone.get_yaw()
-        senD.moveD.getT = drone.get_throttle()
+    if IsConnected:
+        while drone.isConnected():
+            senD.statD.battery_p = drone.get_battery_percentage()
+            senD.statD.temp = drone.get_drone_temp()
+            senD.statD.pressure = drone.get_pressure()
+            senD.attiD.attROLL = drone.get_gyro_angles().ROLL
+            senD.attiD.attPITCH = drone.get_gyro_angles().PITCH
+            senD.attiD.attYAW = drone.get_gyro_angles().YAW
+            senD.moveD.getR = drone.get_roll()
+            senD.moveD.getP = drone.get_pitch()
+            senD.moveD.getY = drone.get_yaw()
+            senD.moveD.getT = drone.get_throttle()
+            print("ROLL:{0} PITCH:{1} YAW:{2} THROTTLE:{3}".format(senD.moveD.getR, senD.moveD.getP,
+            senD.moveD.getY, senD.moveD.getT))
 
-        cliSock.send(senD)
+            cliSock.send(senD)
 
 if __name__ == '__main__':
     drone.pair()
